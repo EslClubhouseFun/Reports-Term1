@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESL Clubhouse · Midterm Reports</title>
+<style>
+  :root{
+    --cream:#FCF7F1;
+    --paper:#FFFFFF;
+    --ink:#473C32;
+    --ink-soft:#8A7C6C;
+    --line:#EBE1D5;
+    --rose:#E08A95;
+    --rose-tint:#FBEAEC;
+    --teal:#3FA199;
+    --teal-tint:#E1F0EE;
+    --sun:#EFB94E;
+    --sun-tint:#FBEFCF;
+    --sage:#8FB894;
+    --sage-tint:#E6F0E3;
+    --peach:#EBA079;
+    --peach-tint:#FAE6D9;
+    --shadow:0 10px 30px -12px rgba(71,60,50,.28);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Nunito","Avenir Next",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 600px at 80% -10%, var(--rose-tint), transparent 60%),
+      radial-gradient(900px 500px at 0% 110%, var(--teal-tint), transparent 55%),
+      var(--cream);
+    min-height:100vh;
+    -webkit-text-size-adjust:100%;
+  }
+  .wordmark{font-family:Georgia,"Times New Roman",serif;}
+  .tag{font-family:Georgia,serif;font-style:italic;color:var(--ink-soft);}
+
+  /* ---------- HOME ---------- */
+  #home{
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;padding:48px 20px;text-align:center;
+  }
+  .crest{width:96px;height:96px;margin-bottom:10px;}
+  #home h1{font-size:clamp(34px,6vw,52px);margin:.1em 0 .05em;letter-spacing:.5px;}
+  #home .tag{font-size:clamp(16px,2.4vw,20px);margin-bottom:6px;}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:800;
+    color:var(--rose);margin-bottom:28px;
+  }
+  .pick{
+    display:flex;gap:22px;flex-wrap:wrap;justify-content:center;max-width:760px;width:100%;
+  }
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:30px 26px;width:330px;max-width:100%;cursor:pointer;
+    text-align:left;transition:transform .18s ease, box-shadow .18s ease;
+    position:relative;overflow:hidden;
+  }
+  .card:hover,.card:focus-visible{transform:translateY(-5px);box-shadow:0 20px 40px -16px rgba(71,60,50,.4);outline:none;}
+  .card .band{height:8px;border-radius:8px;width:54px;margin-bottom:18px;}
+  .card h2{margin:0 0 4px;font-size:26px;}
+  .card p{margin:0;color:var(--ink-soft);font-weight:600;font-size:15px;}
+  .card .go{margin-top:16px;font-weight:800;color:var(--teal);font-size:15px;display:flex;align-items:center;gap:6px;}
+  .card .prog{
+    margin-top:14px;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;
+    color:var(--ink-soft);background:var(--cream);border:1px solid var(--line);
+    border-radius:999px;padding:5px 12px;
+  }
+  .card .prog .dot{width:8px;height:8px;border-radius:50%;background:var(--sage);}
+  .card .prog.done .dot{background:var(--teal);}
+  .card .prog.empty .dot{background:#D9CFC1;}
+  .footnote{margin-top:40px;color:var(--ink-soft);font-size:13px;}
+
+  /* ---------- REPORT ---------- */
+  #report{display:none;padding:0 0 80px;}
+  #report.active{display:block;}
+  .bar{
+    position:sticky;top:0;z-index:60;background:rgba(252,247,241,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:14px;padding:12px 18px;flex-wrap:wrap;
+  }
+  .bar .crest{width:38px;height:38px;margin:0;}
+  .bar .titles{display:flex;flex-direction:column;line-height:1.15;margin-right:auto;}
+  .bar .titles .nm{font-family:Georgia,serif;font-size:19px;font-weight:700;}
+  .bar .titles .sub{font-size:12px;color:var(--ink-soft);font-weight:700;letter-spacing:.5px;}
+  .btn{
+    border:1px solid var(--line);background:var(--paper);color:var(--ink);
+    font-family:inherit;font-weight:800;font-size:13px;padding:9px 14px;border-radius:11px;
+    cursor:pointer;transition:.15s;white-space:nowrap;
+  }
+  .btn:hover{border-color:var(--teal);color:var(--teal);}
+  .btn.primary{background:var(--teal);color:#fff;border-color:var(--teal);}
+  .btn.primary:hover{filter:brightness(1.05);color:#fff;}
+  .hint{
+    margin:16px 18px 0;padding:12px 16px;border-radius:12px;background:var(--sun-tint);
+    border:1px solid #F0DDA6;font-size:13.5px;font-weight:600;color:#6f5a1e;
+  }
+  .hint b{font-weight:800;}
+
+  .scroll{overflow:auto;margin:16px 14px 0;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);background:var(--paper);}
+  table{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%;font-size:13px;}
+  th,td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:0;text-align:center;vertical-align:middle;}
+  thead .grp th{
+    font-family:Georgia,serif;font-weight:700;font-size:13px;letter-spacing:.6px;
+    text-transform:uppercase;padding:9px 8px;position:sticky;top:0;z-index:5;
+  }
+  thead .crit th{
+    font-weight:700;font-size:12px;line-height:1.25;padding:9px 8px;
+    min-width:118px;max-width:150px;vertical-align:top;
+  }
+  thead .crit th .ce{outline:none;}
+  thead .crit th .ce:focus{background:#fff8; border-radius:6px;}
+  th.namehead{position:sticky;left:0;z-index:8;background:var(--paper);min-width:120px;}
+  thead .grp th.namehead{z-index:9;}
+  .calc{background:#f3f4f8;color:#5b5566;font-weight:800;}
+  td.name{
+    position:sticky;left:0;z-index:4;background:var(--paper);text-align:left;
+    font-family:Georgia,serif;font-weight:700;font-size:14px;padding:6px 10px;min-width:120px;
+    box-shadow:2px 0 0 var(--line);
+  }
+  tbody tr:nth-child(even) td.name{background:#FCFAF6;}
+  tbody tr:nth-child(even) td{background:#FCFAF6;}
+  td .nameedit{font-family:Georgia,serif;font-weight:700;font-size:14px;border:none;background:transparent;width:100%;color:var(--ink);outline:none;padding:2px;border-radius:6px;}
+  td .nameedit:focus{background:#fff;box-shadow:0 0 0 2px var(--teal);}
+  select.score{
+    appearance:none;-webkit-appearance:none;border:none;background:transparent;
+    font-family:inherit;font-weight:800;font-size:15px;color:var(--ink);
+    width:100%;height:100%;min-height:40px;text-align:center;text-align-last:center;cursor:pointer;
+  }
+  select.score:focus{outline:none;box-shadow:inset 0 0 0 2px var(--teal);border-radius:8px;}
+  td.scorecell{padding:0;min-width:60px;}
+  td.scorecell.s1{background:#FBE7E7!important;}
+  td.scorecell.s2{background:#FBEFD9!important;}
+  td.scorecell.s3{background:#EAF2E9!important;}
+  td.scorecell.s4{background:#DFF0E6!important;}
+  td.calccell{min-width:62px;font-weight:800;color:#5b5566;background:#F2F3F7!important;}
+  td.finalcell{min-width:62px;font-weight:800;background:#E9ECF4!important;color:#3a3550;}
+  td.overall{min-width:66px;font-weight:900;font-size:16px;background:#FBEFCF!important;color:#6f5a1e;}
+  td.commentcell{min-width:240px;max-width:300px;background:#FFFDF2!important;padding:0;}
+  td.commentcell textarea{
+    width:100%;min-height:54px;border:none;background:transparent;resize:vertical;
+    font-family:inherit;font-size:13px;color:var(--ink);padding:8px;outline:none;line-height:1.35;
+  }
+  td.commentcell textarea:focus{box-shadow:inset 0 0 0 2px var(--sun);}
+  tfoot td{background:var(--paper);}
+  .addrow{padding:10px;text-align:left;}
+
+  /* section tint chips on group header */
+  .g-classroom{background:var(--teal-tint);color:#236b65;}
+  .g-comprehension{background:var(--rose-tint);color:#a04955;}
+  .g-reading{background:var(--sage-tint);color:#4d7a51;}
+  .g-writing{background:var(--peach-tint);color:#a85f37;}
+  .g-overall{background:var(--sun-tint);color:#7a611d;}
+  .g-comment{background:#FFF8C8;color:#7a6a1d;}
+  .c-classroom{background:var(--teal-tint);}
+  .c-comprehension{background:var(--rose-tint);}
+  .c-reading{background:var(--sage-tint);}
+  .c-writing{background:var(--peach-tint);}
+
+  .sectionnote{font-size:11px;font-weight:700;color:var(--ink-soft);margin-top:6px;}
+  .addcrit{font-size:11px;font-weight:800;color:var(--teal);background:#fff;border:1px dashed var(--teal);border-radius:8px;padding:3px 7px;cursor:pointer;margin-top:6px;}
+  .addcrit:hover{background:var(--teal-tint);}
+
+  .printhead{display:none;align-items:center;gap:14px;padding:4px 4px 14px;}
+  .printhead .crest{width:46px;height:46px;}
+  .printhead .ph-name{font-size:24px;font-weight:700;}
+  .printhead .ph-sub{font-size:12px;color:var(--ink-soft);font-weight:700;letter-spacing:.5px;}
+
+  @media print{
+    body{background:#fff;}
+    .bar,.hint,.no-print,.addcrit,.addrow{display:none!important;}
+    .printhead{display:flex!important;}
+    .scroll{overflow:visible;box-shadow:none;border:none;margin:0;}
+    #report{padding:0;}
+    table{font-size:9.5px;}
+    select.score{font-size:11px;}
+    @page{size:A3 landscape;margin:8mm;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HOME ============ -->
+<section id="home">
+  <svg class="crest" viewBox="0 0 100 100" aria-hidden="true"></svg>
+  <h1 class="wordmark">ESL Clubhouse</h1>
+  <div class="tag">learn · play · grow</div>
+  <div class="eyebrow">Midterm · Term 1 · 2025</div>
+
+  <div class="pick">
+    <div class="card" id="card-k214" tabindex="0" role="button" onclick="openClass('K2.14')" onkeydown="if(event.key==='Enter')openClass('K2.14')">
+      <div class="band" style="background:var(--teal)"></div>
+      <h2 class="wordmark">K2.14</h2>
+      <p>Behaviour, Comprehension, Reading &amp; Writing</p>
+      <div class="prog" id="prog-k214">–</div>
+      <div class="go">Open report &rarr;</div>
+    </div>
+    <div class="card" id="card-prek1" tabindex="0" role="button" onclick="openClass('PreK1')" onkeydown="if(event.key==='Enter')openClass('PreK1')">
+      <div class="band" style="background:var(--rose)"></div>
+      <h2 class="wordmark">PreK1</h2>
+      <p>Comprehension &amp; early Reading</p>
+      <div class="prog" id="prog-prek1">–</div>
+      <div class="go">Open report &rarr;</div>
+    </div>
+  </div>
+
+  <div class="footnote">Tap a class to score. Everything you type saves to this device automatically.</div>
+</section>
+
+<!-- ============ REPORT ============ -->
+<section id="report">
+  <div class="bar">
+    <svg class="crest" viewBox="0 0 100 100" aria-hidden="true"></svg>
+    <div class="titles">
+      <span class="nm wordmark" id="rptName">Class</span>
+      <span class="sub">MIDTERM · TERM 1 · 2025</span>
+    </div>
+    <button class="btn" onclick="goHome()">&larr; Classes</button>
+    <button class="btn" onclick="addStudent()">+ Student</button>
+    <button class="btn" onclick="exportCSV()">Export CSV</button>
+    <button class="btn" onclick="printReport()">Print</button>
+    <button class="btn primary" onclick="resetClass()">Reset</button>
+  </div>
+
+  <div class="printhead">
+    <svg class="crest" viewBox="0 0 100 100" aria-hidden="true"></svg>
+    <div>
+      <div class="ph-name wordmark" id="phName">Class</div>
+      <div class="ph-sub">Midterm · Term 1 · 2025 &nbsp;·&nbsp; <span id="phDate"></span></div>
+    </div>
+  </div>
+
+  <div class="hint">
+    Scores run <b>1–4</b>. <b>Average</b> and every <b>Final Score</b> fill in automatically. Tap a column heading to rename it, or use <b>+ add criterion</b> to add one I couldn't see in the screenshots.
+  </div>
+
+  <div class="scroll">
+    <table id="grid"></table>
+  </div>
+</section>
+
+<script>
+/* ---------- Brand crest: wireframe globe + heart ---------- */
+const CREST = `
+  <g fill="none" stroke="#3FA199" stroke-width="2.2" stroke-linecap="round">
+    <circle cx="50" cy="50" r="36"/>
+    <ellipse cx="50" cy="50" rx="36" ry="14"/>
+    <ellipse cx="50" cy="50" rx="14" ry="36"/>
+    <line x1="14" y1="50" x2="86" y2="50"/>
+  </g>
+  <path d="M50 67 C 41 60, 30 54, 30 45 C 30 39, 35 35, 40 35 C 45 35, 48 38, 50 42
+           C 52 38, 55 35, 60 35 C 65 35, 70 39, 70 45 C 70 54, 59 60, 50 67 Z"
+        fill="#E08A95"/>`;
+document.querySelectorAll('.crest').forEach(s=>s.innerHTML=CREST);
+
+/* ---------- Default data ---------- */
+const DEFAULTS = {
+  "K2.14":{
+    label:"K2.14",
+    students:["Namo","Nakul","Darin","Diary","Aungaing","Naeton","Kira","Ray","Tiwkhao","Znang-jie","Anya","Sherlyn","Phop","Storm","Ai","Lamp"],
+    sections:[
+      {id:"classroom",title:"Classroom Interactions",crit:[
+        "Pays attention and participates in classroom activities",
+        "Positive behaviour towards learning English (Polite, Obedient & Well-Behaved)"]},
+      {id:"comprehension",title:"Comprehension & Speaking",crit:[
+        "Identifies, names and recognises feelings",
+        "Identifies, names and recognises different weather",
+        "Identifies, names and recognises days of the week",
+        "Identifies, names and recognises colours",
+        "Identifies, names and recognises shapes"]},
+      {id:"reading",title:"Reading",crit:[
+        "Can read words and basic sentences from the Reading and Writing lesson"]},
+      {id:"writing",title:"Writing",crit:[
+        "Can write upper case letters A–Z",
+        "Can write lower case letters a–z"]}
+    ]
+  },
+  "PreK1":{
+    label:"PreK1",
+    students:["Jayjiro","Prom","Indy","Intel","Thyme","Panther","Bhoti","Chermarin","Vela","Amara","Nari","Rigi","Nannam"],
+    sections:[
+      {id:"comprehension",title:"Comprehension & Speaking",crit:[
+        "Can start to recognise vocabulary by pointing"]},
+      {id:"reading",title:"Reading",crit:[
+        "Can recognise the letter A in the word ANT",
+        "Can recognise the letter B in the word BAT",
+        "Can recognise the letter C in the word CAT",
+        "Can recognise the letter D in the word DOG",
+        "Can recognise the letter E in the word EGG",
+        "Can recognise the letter F in the word FISH"]}
+    ]
+  }
+};
+
+const STORE_KEY="eslcc_midterm_t1_2025_v1";
+let DB = load();
+let current=null;
+
+function load(){
+  try{const raw=localStorage.getItem(STORE_KEY);if(raw)return JSON.parse(raw);}catch(e){}
+  return seed();
+}
+function seed(){
+  const d={};
+  for(const k in DEFAULTS){
+    const def=DEFAULTS[k];
+    d[k]={
+      label:def.label,
+      students:def.students.slice(),
+      sections:def.sections.map(s=>({id:s.id,title:s.title,crit:s.crit.slice()})),
+      scores:{}, comments:{}
+    };
+  }
+  return d;
+}
+function save(){try{localStorage.setItem(STORE_KEY,JSON.stringify(DB));}catch(e){}}
+
+/* ---------- compute ---------- */
+function stats(arr){
+  const v=arr.filter(x=>x!==null&&x!==""&&!isNaN(x)).map(Number);
+  if(!v.length)return{avg:null,final:null};
+  const avg=v.reduce((a,b)=>a+b,0)/v.length;
+  return{avg,final:Math.round(avg)};
+}
+
+/* ---------- render ---------- */
+function openClass(key){
+  current=key;
+  const c=DB[key];
+  document.getElementById('home').style.display='none';
+  document.getElementById('report').classList.add('active');
+  document.getElementById('rptName').textContent=c.label+" Report Card";
+  document.getElementById('phName').textContent=c.label+" Report Card";
+  document.getElementById('phDate').textContent=new Date().toLocaleDateString(undefined,{day:'numeric',month:'long',year:'numeric'});
+  renderGrid();
+  window.scrollTo(0,0);
+}
+function goHome(){
+  current=null;
+  document.getElementById('report').classList.remove('active');
+  document.getElementById('home').style.display='flex';
+  refreshHome();
+}
+
+function renderGrid(){
+  const c=DB[current];
+  const t=document.getElementById('grid');
+  // header group row
+  let grp='<thead><tr class="grp"><th class="namehead" rowspan="2">Student</th>';
+  let crit='<tr class="crit">';
+  c.sections.forEach(sec=>{
+    const span=sec.crit.length+2; // criteria + avg + final
+    grp+=`<th class="g-${sec.id}" colspan="${span}">${esc(sec.title)}</th>`;
+    sec.crit.forEach((cr,ci)=>{
+      const addBtn = ci===sec.crit.length-1
+        ? `<div><button class="addcrit" onclick="addCrit('${sec.id}')">+ add criterion</button></div>` : '';
+      crit+=`<th class="c-${sec.id}"><span class="ce" contenteditable="true"
+              onblur="editCrit('${sec.id}',${ci},this.textContent)">${esc(cr)}</span>${addBtn}</th>`;
+    });
+    crit+=`<th class="calc">${esc(sec.title.split(' ')[0])} Average</th>`;
+    crit+=`<th class="calc">${esc(sec.title.split(' ')[0])} Final Score</th>`;
+  });
+  grp+='<th class="g-overall" rowspan="2">Overall Final Score</th>';
+  grp+='<th class="g-comment" rowspan="2">Comment</th>';
+  grp+='</tr>';
+  crit+='</tr></thead>';
+
+  // body
+  let body='<tbody>';
+  c.students.forEach((name,si)=>{
+    body+=`<tr><td class="name"><input class="nameedit" value="${esc(name)}"
+            onchange="editName(${si},this.value)"></td>`;
+    c.sections.forEach(sec=>{
+      sec.crit.forEach((cr,ci)=>{
+        const val=getScore(si,sec.id,ci);
+        body+=`<td class="scorecell ${val?'s'+val:''}" id="cell-${si}-${sec.id}-${ci}">
+                ${scoreSelect(si,sec.id,ci,val)}</td>`;
+      });
+      body+=`<td class="calccell" id="avg-${si}-${sec.id}">–</td>`;
+      body+=`<td class="finalcell" id="fin-${si}-${sec.id}">–</td>`;
+    });
+    body+=`<td class="overall" id="ovr-${si}">–</td>`;
+    body+=`<td class="commentcell"><textarea placeholder="Write a comment…"
+            oninput="editComment(${si},this.value)">${esc(c.comments[si]||"")}</textarea></td>`;
+    body+='</tr>';
+  });
+  body+='</tbody>';
+
+  t.innerHTML=grp+crit+body;
+  c.students.forEach((n,si)=>recompute(si));
+}
+
+function scoreSelect(si,secId,ci,val){
+  let o='<option value="">–</option>';
+  for(let n=1;n<=4;n++)o+=`<option value="${n}" ${val==n?'selected':''}>${n}</option>`;
+  return `<select class="score" onchange="setScore(${si},'${secId}',${ci},this.value)">${o}</select>`;
+}
+
+/* ---------- data access ---------- */
+function key(si,secId,ci){return si+"|"+secId+"|"+ci;}
+function scoreOf(cls,si,secId,ci){const v=DB[cls].scores[key(si,secId,ci)];return v==null?"":v;}
+function getScore(si,secId,ci){return scoreOf(current,si,secId,ci);}
+function setScore(si,secId,ci,val){
+  const c=DB[current];
+  if(val==="")delete c.scores[key(si,secId,ci)];
+  else c.scores[key(si,secId,ci)]=Number(val);
+  const cell=document.getElementById(`cell-${si}-${secId}-${ci}`);
+  cell.className='scorecell '+(val?'s'+val:'');
+  recompute(si);save();
+}
+function editName(si,val){DB[current].students[si]=val.trim()||("Student "+(si+1));save();}
+function editComment(si,val){DB[current].comments[si]=val;save();}
+function editCrit(secId,ci,text){
+  const sec=DB[current].sections.find(s=>s.id===secId);
+  sec.crit[ci]=(text||"").trim()||sec.crit[ci];save();
+}
+function addCrit(secId){
+  const sec=DB[current].sections.find(s=>s.id===secId);
+  sec.crit.push("New criterion");save();renderGrid();
+}
+function addStudent(){
+  const c=DB[current];c.students.push("New student");save();renderGrid();
+  document.querySelector('.scroll').scrollTop=document.querySelector('.scroll').scrollHeight;
+}
+
+/* ---------- recompute one student row ---------- */
+function recompute(si){
+  const c=DB[current];const finals=[];
+  c.sections.forEach(sec=>{
+    const vals=sec.crit.map((cr,ci)=>getScore(si,sec.id,ci));
+    const st=stats(vals);
+    document.getElementById(`avg-${si}-${sec.id}`).textContent=st.avg==null?"–":st.avg.toFixed(1);
+    document.getElementById(`fin-${si}-${sec.id}`).textContent=st.final==null?"–":st.final;
+    if(st.final!=null)finals.push(st.final);
+  });
+  const ov=stats(finals);
+  document.getElementById(`ovr-${si}`).textContent=ov.final==null?"–":ov.final;
+}
+
+/* ---------- misc ---------- */
+/* ---------- home progress ---------- */
+function classProgress(cls){
+  const c=DB[cls];const totalCrit=c.sections.reduce((n,s)=>n+s.crit.length,0);
+  let complete=0,started=0;
+  c.students.forEach((nm,si)=>{
+    let filled=0;
+    c.sections.forEach(sec=>sec.crit.forEach((cr,ci)=>{ if(scoreOf(cls,si,sec.id,ci)!=="")filled++; }));
+    if(filled>0)started++;
+    if(totalCrit>0&&filled===totalCrit)complete++;
+  });
+  return{complete,started,total:c.students.length};
+}
+function refreshHome(){
+  [["K2.14","prog-k214"],["PreK1","prog-prek1"]].forEach(([cls,id])=>{
+    const el=document.getElementById(id);if(!el)return;
+    const p=classProgress(cls);
+    el.textContent=`${p.complete} of ${p.total} students complete`;
+    el.className="prog"+(p.complete===p.total?" done":p.started===0?" empty":"");
+    el.insertAdjacentHTML('afterbegin','<span class="dot"></span>');
+  });
+}
+
+/* ---------- CSV export ---------- */
+function exportCSV(){
+  const c=DB[current];const rows=[];const head=["Student"];
+  c.sections.forEach(sec=>{sec.crit.forEach(cr=>head.push(cr));head.push(sec.title+" Average");head.push(sec.title+" Final Score");});
+  head.push("Overall Final Score","Comment");rows.push(head);
+  c.students.forEach((name,si)=>{
+    const r=[name];const finals=[];
+    c.sections.forEach(sec=>{
+      const vals=sec.crit.map((cr,ci)=>{const v=getScore(si,sec.id,ci);r.push(v);return v;});
+      const st=stats(vals);
+      r.push(st.avg==null?"":st.avg.toFixed(1));r.push(st.final==null?"":st.final);
+      if(st.final!=null)finals.push(st.final);
+    });
+    const ov=stats(finals);r.push(ov.final==null?"":ov.final);r.push(c.comments[si]||"");
+    rows.push(r);
+  });
+  const csv=rows.map(r=>r.map(cell=>{const s=String(cell);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}).join(",")).join("\r\n");
+  const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8;"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download=current.replace(/[^\w.-]/g,"_")+"_Midterm_T1_2025.csv";
+  document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(a.href);
+}
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function printReport(){window.print();}
+function resetClass(){
+  if(!confirm("Reset "+current+" back to the blank class list? This clears all scores and comments for this class."))return;
+  const def=DEFAULTS[current];
+  DB[current]={label:def.label,students:def.students.slice(),
+    sections:def.sections.map(s=>({id:s.id,title:s.title,crit:s.crit.slice()})),
+    scores:{},comments:{}};
+  save();renderGrid();
+}
+refreshHome();
+</script>
+</body>
+</html>
