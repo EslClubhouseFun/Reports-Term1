@@ -72,7 +72,128 @@
   }
   .card .prog .dot{width:8px;height:8px;border-radius:50%;background:var(--sage);}
   .card .prog.done .dot{background:var(--teal);}
+  /* ---------- PHONICS ---------- */
+  #phonics{display:none;padding:0 0 80px;}
+  #phonics.active{display:block;}
+  .ph-students{
+    display:flex;gap:8px;overflow-x:auto;padding:14px 16px 4px;flex-wrap:nowrap;
+    position:sticky;top:63px;z-index:40;background:rgba(252,247,241,.92);backdrop-filter:blur(6px);
+  }
+  .ph-pill{
+    flex:none;border:1px solid var(--line);background:var(--paper);border-radius:999px;
+    padding:8px 14px;font-family:Georgia,serif;font-weight:700;font-size:14px;color:var(--ink);
+    cursor:pointer;display:flex;align-items:center;gap:8px;transition:.15s;
+  }
+  .ph-pill:hover{border-color:var(--sun);}
+  .ph-pill.active{background:var(--sun);border-color:var(--sun);color:#5c4a12;}
+  .ph-pill .pill-badge{
+    background:var(--sage-tint);color:#4d7a51;border-radius:999px;font-family:"Nunito",sans-serif;
+    font-size:11px;font-weight:800;padding:1px 7px;min-width:20px;text-align:center;
+  }
+  .ph-pill.active .pill-badge{background:#fff;}
+  .ph-wrap{margin:8px 16px 0;}
+  .ph-summary{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);
+    padding:16px 18px;margin-bottom:16px;
+  }
+  .ph-summary .ph-name{font-size:22px;font-weight:700;margin-bottom:10px;}
+  .ph-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .ph-chips .chip{font-size:13px;font-weight:800;padding:6px 12px;border-radius:999px;}
+  .chip.read{background:var(--sage-tint);color:#3f7a44;}
+  .chip.cant{background:var(--rose-tint);color:#b04a56;}
+  .chip.none{background:var(--cream);color:var(--ink-soft);border:1px solid var(--line);}
+  .ph-progress{height:12px;border-radius:999px;overflow:hidden;background:#EFE7DB;display:flex;}
+  .pbar{height:100%;}
+  .pbar.read{background:var(--sage);}
+  .pbar.cant{background:var(--rose);}
+  .pw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:9px;}
+  .pw-group{
+    font-family:Georgia,serif;font-weight:700;font-size:14px;color:var(--peach);
+    letter-spacing:.4px;margin:18px 2px 9px;display:flex;align-items:center;gap:8px;
+  }
+  .pw-group:before,.pw-group:after{content:"";height:1px;background:var(--line);flex:1;}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;}
+  .seg .seg-btn{border:none;border-radius:0;margin:0;}
+  .seg .seg-btn+.seg-btn{border-left:1px solid var(--line);}
+  .seg .seg-btn.seg-active{background:var(--sun);color:#5c4a12;}
+  .pw{
+    display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--paper);
+    border-radius:12px;padding:11px 12px;cursor:pointer;font-family:inherit;font-weight:700;
+    font-size:16px;color:var(--ink);transition:.12s;text-align:left;
+  }
+  .pw:hover{border-color:var(--sun);}
+  .pw .num{font-size:11px;font-weight:800;color:var(--ink-soft);min-width:20px;}
+  .pw .wtxt{flex:1;font-family:"Nunito",sans-serif;}
+  .pw .mark{font-size:16px;font-weight:900;width:18px;text-align:center;}
+  .pw.read{background:var(--sage-tint);border-color:#bcd8bd;}
+  .pw.read .mark{color:#3f7a44;}
+  .pw.cant{background:var(--rose-tint);border-color:#f0c4c9;}
+  .pw.cant .mark{color:#c0505c;}
+  /* overview */
+  .ph-overview{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;}
+  .ov-table{width:100%;border-collapse:collapse;font-size:14px;}
+  .ov-table th{background:var(--sun-tint);color:#6f5a1e;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.5px;padding:11px 12px;text-align:left;}
+  .ov-table td{border-top:1px solid var(--line);padding:11px 12px;}
+  .ov-table tbody tr{cursor:pointer;}
+  .ov-table tbody tr:hover{background:var(--sun-tint);}
+  .ov-name{font-family:Georgia,serif;font-weight:700;}
+  .ov-num{font-weight:800;text-align:center;width:90px;}
+  .ov-num.read{color:#3f7a44;} .ov-num.cant{color:#b04a56;}
+  .ov-bar{width:34%;}
+  .ovbarwrap{height:11px;border-radius:999px;overflow:hidden;background:#EFE7DB;display:flex;}
+
   .card .prog.empty .dot{background:#D9CFC1;}
+  .guidelink{
+    margin-top:12px;display:inline-block;background:none;border:none;cursor:pointer;
+    font-family:inherit;font-weight:800;font-size:13px;color:var(--rose);padding:0;
+  }
+  .guidelink:hover{text-decoration:underline;}
+
+  /* star buttons */
+  .ginfo{
+    border:none;background:rgba(255,255,255,.65);color:#C8912E;cursor:pointer;
+    font-size:12px;border-radius:50%;width:20px;height:20px;line-height:1;padding:0;
+    vertical-align:middle;margin-left:4px;
+  }
+  .ginfo:hover{background:#fff;color:var(--sun);}
+
+  /* guide modal */
+  .guide-overlay{
+    display:none;position:fixed;inset:0;z-index:200;background:rgba(71,60,50,.4);
+    backdrop-filter:blur(3px);align-items:flex-start;justify-content:center;padding:28px 16px;
+  }
+  .guide-overlay.open{display:flex;}
+  .guide-sheet{
+    background:var(--paper);border-radius:22px;box-shadow:0 30px 70px -20px rgba(71,60,50,.55);
+    width:100%;max-width:980px;max-height:90vh;overflow:auto;padding:24px 26px 30px;
+  }
+  .gd-head{display:flex;align-items:center;gap:14px;position:sticky;top:-24px;background:var(--paper);
+    padding:6px 0 14px;border-bottom:1px solid var(--line);margin-bottom:16px;z-index:2;}
+  .gd-head .crest{width:44px;height:44px;flex:none;}
+  .gd-titles{margin-right:auto;}
+  .gd-title{font-size:22px;font-weight:700;line-height:1.1;}
+  .gd-titleth{font-size:13px;color:var(--ink-soft);font-weight:700;margin-top:2px;}
+  .gd-close{border:1px solid var(--line);background:var(--cream);border-radius:50%;width:36px;height:36px;
+    font-size:20px;line-height:1;cursor:pointer;color:var(--ink);flex:none;}
+  .gd-close:hover{border-color:var(--rose);color:var(--rose);}
+  .gd-legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+  .lvchip{font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;display:flex;gap:6px;align-items:center;}
+  .lvchip b{font-weight:800;}
+  .gd-skill{margin-bottom:26px;}
+  .gd-skillname{display:flex;flex-direction:column;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--line);}
+  .gd-skillname .wordmark{font-size:19px;font-weight:700;color:var(--ink);}
+  .gd-skillname .th{font-size:13px;color:var(--ink-soft);font-weight:700;margin-top:2px;}
+  .gd-levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;}
+  .gd-lv{border-radius:14px;padding:13px 14px;border:1px solid var(--line);}
+  .gd-stars{font-size:15px;letter-spacing:1px;margin-bottom:7px;display:flex;flex-direction:column;gap:3px;}
+  .gd-lvlabel{font-size:10.5px;letter-spacing:.4px;font-weight:800;text-transform:uppercase;color:var(--ink-soft);}
+  .gd-en{font-size:13px;font-weight:600;line-height:1.35;color:var(--ink);}
+  .gd-th{font-size:12px;line-height:1.4;color:var(--ink-soft);margin-top:7px;}
+  /* level colours */
+  .lv1{background:var(--rose-tint);}   .lvchip.lv1{background:var(--rose-tint);color:#a04955;}   .gd-lv.lv1 .gd-stars{color:#D97B86;}
+  .lv2{background:var(--sun-tint);}    .lvchip.lv2{background:var(--sun-tint);color:#8a6d1c;}    .gd-lv.lv2 .gd-stars{color:#D9A63E;}
+  .lv3{background:var(--sage-tint);}   .lvchip.lv3{background:var(--sage-tint);color:#4d7a51;}   .gd-lv.lv3 .gd-stars{color:#6FA574;}
+  .lv4{background:var(--teal-tint);}   .lvchip.lv4{background:var(--teal-tint);color:#236b65;}   .gd-lv.lv4 .gd-stars{color:#3FA199;}
   .footnote{margin-top:40px;color:var(--ink-soft);font-size:13px;}
 
   /* ---------- REPORT ---------- */
@@ -172,7 +293,7 @@
 
   @media print{
     body{background:#fff;}
-    .bar,.hint,.no-print,.addcrit,.addrow{display:none!important;}
+    .bar,.hint,.no-print,.addcrit,.addrow,.guide-overlay,.ginfo{display:none!important;}
     .printhead{display:flex!important;}
     .scroll{overflow:visible;box-shadow:none;border:none;margin:0;}
     #report{padding:0;}
@@ -189,7 +310,7 @@
   <svg class="crest" viewBox="0 0 100 100" aria-hidden="true"></svg>
   <h1 class="wordmark">ESL Clubhouse</h1>
   <div class="tag">learn · play · grow</div>
-  <div class="eyebrow">Midterm · Term 1 · 2025</div>
+  <div class="eyebrow">Midterm · Term 1 · 2026</div>
 
   <div class="pick">
     <div class="card" id="card-k214" tabindex="0" role="button" onclick="openClass('K2.14')" onkeydown="if(event.key==='Enter')openClass('K2.14')">
@@ -197,6 +318,7 @@
       <h2 class="wordmark">K2.14</h2>
       <p>Behaviour, Comprehension, Reading &amp; Writing</p>
       <div class="prog" id="prog-k214">–</div>
+      <button class="guidelink" onclick="event.stopPropagation();openGuide('K2.14')">&#9733; Scoring guide</button>
       <div class="go">Open report &rarr;</div>
     </div>
     <div class="card" id="card-prek1" tabindex="0" role="button" onclick="openClass('PreK1')" onkeydown="if(event.key==='Enter')openClass('PreK1')">
@@ -204,7 +326,22 @@
       <h2 class="wordmark">PreK1</h2>
       <p>Comprehension &amp; early Reading</p>
       <div class="prog" id="prog-prek1">–</div>
+      <button class="guidelink" onclick="event.stopPropagation();openGuide('PreK1')">&#9733; Scoring guide</button>
       <div class="go">Open report &rarr;</div>
+    </div>
+    <div class="card" id="card-phonics" tabindex="0" role="button" onclick="openPhonics()" onkeydown="if(event.key==='Enter')openPhonics()">
+      <div class="band" style="background:var(--sun)"></div>
+      <h2 class="wordmark">Phonics Reading</h2>
+      <p>K2.14 · Oxford words 1&ndash;60 · read or can't read</p>
+      <div class="prog" id="prog-phonics">–</div>
+      <div class="go">Open checklist &rarr;</div>
+    </div>
+    <div class="card" id="card-hfw" tabindex="0" role="button" onclick="openHFW()" onkeydown="if(event.key==='Enter')openHFW()">
+      <div class="band" style="background:var(--peach)"></div>
+      <h2 class="wordmark">High Frequency Words</h2>
+      <p>K2.14 · HFW weeks 1&ndash;8 · read or can't read</p>
+      <div class="prog" id="prog-hfw">–</div>
+      <div class="go">Open checklist &rarr;</div>
     </div>
   </div>
 
@@ -217,10 +354,13 @@
     <svg class="crest" viewBox="0 0 100 100" aria-hidden="true"></svg>
     <div class="titles">
       <span class="nm wordmark" id="rptName">Class</span>
-      <span class="sub">MIDTERM · TERM 1 · 2025</span>
+      <span class="sub">MIDTERM · TERM 1 · 2026</span>
     </div>
     <button class="btn" onclick="goHome()">&larr; Classes</button>
     <button class="btn" onclick="addStudent()">+ Student</button>
+    <button class="btn" onclick="openGuide(current)">&#9733; Scoring guide</button>
+    <button class="btn" id="toPhonicsBtn" onclick="openPhonics()">Phonics list</button>
+    <button class="btn" id="toHFWBtn" onclick="openHFW()">HFW list</button>
     <button class="btn" onclick="exportCSV()">Export CSV</button>
     <button class="btn" onclick="printReport()">Print</button>
     <button class="btn primary" onclick="resetClass()">Reset</button>
@@ -230,7 +370,7 @@
     <svg class="crest" viewBox="0 0 100 100" aria-hidden="true"></svg>
     <div>
       <div class="ph-name wordmark" id="phName">Class</div>
-      <div class="ph-sub">Midterm · Term 1 · 2025 &nbsp;·&nbsp; <span id="phDate"></span></div>
+      <div class="ph-sub">Midterm · Term 1 · 2026 &nbsp;·&nbsp; <span id="phDate"></span></div>
     </div>
   </div>
 
@@ -241,6 +381,48 @@
   <div class="scroll">
     <table id="grid"></table>
   </div>
+</section>
+
+<!-- ============ SCORING GUIDE ============ -->
+<div id="guide" class="guide-overlay" onclick="if(event.target===this)closeGuide()">
+  <div class="guide-sheet" role="dialog" aria-modal="true" aria-label="Scoring guide">
+    <div id="gdBody"></div>
+  </div>
+</div>
+
+<!-- ============ READING CHECKLISTS (phonics + HFW) ============ -->
+<section id="phonics">
+  <div class="bar">
+    <svg class="crest" viewBox="0 0 100 100" aria-hidden="true"></svg>
+    <div class="titles">
+      <span class="nm wordmark" id="phTitle">K2.14 · Phonics Reading</span>
+      <span class="sub" id="phSub">OXFORD PHONICSCARD · WORDS 1&ndash;60</span>
+    </div>
+    <button class="btn" onclick="goHome()">&larr; Classes</button>
+    <button class="btn" onclick="openClass('K2.14')">Report card</button>
+    <span class="seg">
+      <button class="btn seg-btn" id="segPhonics" onclick="openList('phonics')">Phonics</button>
+      <button class="btn seg-btn" id="segHFW" onclick="openList('hfw')">HFW</button>
+    </span>
+    <button class="btn" id="phModeBtn" onclick="togglePhonicsMode()">Overview</button>
+    <button class="btn" onclick="exportListCSV()">Export CSV</button>
+    <button class="btn" onclick="printReport()">Print</button>
+  </div>
+
+  <div class="printhead">
+    <svg class="crest" viewBox="0 0 100 100" aria-hidden="true"></svg>
+    <div>
+      <div class="ph-name wordmark" id="phPrintName">K2.14 · Phonics Reading</div>
+      <div class="ph-sub"><span id="phPrintSub2">Oxford PhonicsCard · Words 1&ndash;60</span> &nbsp;·&nbsp; <span id="phPrintDate"></span></div>
+    </div>
+  </div>
+
+  <div class="hint" id="phHint">
+    Tap a word to cycle: <b>grey → &#10003; can read → &#10007; can't read → grey</b>. Pick a student above; totals update as you go. Everything saves to this device.
+  </div>
+
+  <div id="phStudentBar" class="ph-students"></div>
+  <div id="phBody" class="ph-wrap"></div>
 </section>
 
 <script>
@@ -273,6 +455,10 @@ const DEFAULTS = {
         "Identifies, names and recognises colours",
         "Identifies, names and recognises shapes"]},
       {id:"reading",title:"Reading",crit:[
+        "Can decode and blend \u2018am an\u2019",
+        "Can decode and blend \u2018ad ag ap at\u2019",
+        "Can decode and blend \u2018et en ed\u2019",
+        "Can decode and blend \u2018ip ib id\u2019",
         "Can read words and basic sentences from the Reading and Writing lesson"]},
       {id:"writing",title:"Writing",crit:[
         "Can write upper case letters A–Z",
@@ -296,8 +482,146 @@ const DEFAULTS = {
   }
 };
 
-const STORE_KEY="eslcc_midterm_t1_2025_v1";
+/* ---------- Scoring rubric (from the Expectations sheets) ---------- */
+const LEVELS=[
+  {en:"Beginning to show signs of understanding", th:"เริ่มมีพัฒนาการและแสดงให้เห็นถึงสัญญาณของความเข้าใจ"},
+  {en:"Working towards expectation",               th:"นักเรียนกำลังพัฒนาและมุ่งไปสู่เป้าหมายตามที่คาดหวัง"},
+  {en:"Meets expectation",                          th:"นักเรียนสามารถทำความคาดหวังที่กำหนด"},
+  {en:"Exceeds expectation",                        th:"นักเรียนมีผลการเรียนรู้สูงกว่ามาตรฐานหรือความคาดหวังที่กำหนด"}
+];
+const RUBRIC={
+  "PreK1":{
+    enTitle:"Pre-K · Midterm Term 1 Expectations",
+    thTitle:"ความคาดหวังในการสอบกลางภาค ภาคเรียนที่ 1 ของระดับชั้นเตรียมอนุบาล (Pre-K)",
+    skills:[
+      {id:"classroom", en:"Classroom Interactions", th:"ปฏิสัมพันธ์ในห้องเรียน", levels:[
+        {en:"Is beginning to notice and watch classroom activities but rarely joins in; often needs one-to-one encouragement",
+         th:"เริ่มสังเกตและเฝ้าดูการทำกิจกรรมในห้องเรียน แต่มีส่วนร่วมเพียงเล็กน้อย มักต้องการการกระตุ้นหรือสนับสนุนแบบตัวต่อตัว"},
+        {en:"Sometimes joins classroom activities when prompted; starting to follow along with teacher guidance",
+         th:"บางครั้งเข้าร่วมกิจกรรมในห้องเรียนเมื่อได้รับการกระตุ้น เริ่มทำตามคำแนะนำของครูได้"},
+        {en:"Can take part in activities about half of the time when asked or shown, showing early social engagement",
+         th:"เข้าร่วมกิจกรรมได้ประมาณครึ่งหนึ่งของเวลาเมื่อได้รับคำแนะนำ/สาธิต แสดงการมีปฏิสัมพันธ์กับเพื่อน ๆ"},
+        {en:"Joins in most activities willingly and happily, often without reminders; enjoys interacting with teachers and classmates",
+         th:"เข้าร่วมกิจกรรมส่วนใหญ่ด้วยความเต็มใจและร่าเริง มักทำโดยไม่ต้องมีการเตือน สนุกกับการมีปฏิสัมพันธ์กับครูและเพื่อน ๆ"}
+      ]},
+      {id:"comprehension", en:"Comprehension and Speaking", th:"ทักษะการฟัง-เข้าใจและการพูด", levels:[
+        {en:"Responds to instructions or questions occasionally, often with gestures rather than words",
+         th:"ตอบสนองต่อคำสั่งหรือคำถามเป็นครั้งคราว มักใช้ท่าทางแทนการพูด"},
+        {en:"Responds more often when prompted, sometimes using single words; beginning to show understanding",
+         th:"ตอบสนองบ่อยขึ้นเมื่อได้รับการกระตุ้น บางครั้งใช้คำเดียว เริ่มแสดงให้เห็นถึงความเข้าใจ"},
+        {en:"Can respond about half of the time when asked or shown, showing clear understanding and willingness to speak",
+         th:"สามารถตอบได้ประมาณครึ่งหนึ่งของเวลาเมื่อถูกถามหรือสาธิต แสดงให้เห็นถึงความเข้าใจอย่างชัดเจนและเต็มใจที่จะพูด"},
+        {en:"Responds confidently most of the time, often using words or short phrases independently",
+         th:"ตอบสนองด้วยความมั่นใจเกือบตลอดเวลา มักใช้คำหรือวลีสั้น ๆ โดยไม่ต้องมีการช่วยเหลือ"}
+      ]},
+      {id:"reading", en:"Letter Awareness", th:"ทักษะการรับรู้ตัวอักษร", levels:[
+        {en:"Is beginning to notice letters but has difficulty recognising them; may look to teacher for help",
+         th:"เริ่มสังเกตตัวอักษร แต่จดจำได้ยาก มักขอความช่วยเหลือจากครู"},
+        {en:"Can sometimes identify the starting letter with support or hints",
+         th:"บางครั้งสามารถระบุตัวอักษรเริ่มต้นได้เมื่อได้รับการช่วยเหลือหรือมีคำใบ้"},
+        {en:"Can point to the starting letter in 1 of the words from that letter set",
+         th:"สามารถชี้ตัวอักษรเริ่มต้นในคำใดคำหนึ่งจากชุดตัวอักษรนั้นได้"},
+        {en:"Can point to starting letters in several words, and may name the letter or give extra examples independently",
+         th:"ชี้ตัวอักษรเริ่มต้นในหลายคำ และสามารถบอกชื่อตัวอักษรหรือยกตัวอย่างเพิ่มเติมได้เอง"}
+      ]},
+      {id:"writing", en:"Writing", th:"ทักษะการเขียน", levels:[
+        {en:"Can hold a pencil with support but struggles to control movements; enjoys making marks",
+         th:"สามารถจับดินสอได้เมื่อมีการช่วยเหลือ แต่ยังควบคุมการเคลื่อนไหวได้ยาก สนุกกับการขีดเขียน"},
+        {en:"Can hold a pencil more steadily and attempts to draw or trace, though lines are often uneven",
+         th:"สามารถจับดินสอได้มั่นคงขึ้น และพยายามวาดหรือระบายตามเส้น แม้เส้นมักไม่เรียบ"},
+        {en:"Can hold a pencil and make a line, even if not traced perfectly; showing developing control",
+         th:"จับดินสอและลากเส้นได้ แม้เส้นไม่เรียบ แสดงการควบคุมที่พัฒนาขึ้น"},
+        {en:"Holds a pencil confidently, makes clear lines, and may begin to trace or attempt shapes and letters beyond expectation",
+         th:"จับดินสอมั่นใจ วาดเส้นชัดเจน เริ่มระบายตามเส้นหรือลองวาดรูปร่างและตัวอักษรเกินความคาดหวัง"}
+      ]}
+    ]
+  },
+  "K2.14":{
+    enTitle:"K2 · Midterm Term 1 Expectations",
+    thTitle:"ความคาดหวังในการสอบกลางภาค ภาคเรียนที่ 1 ของระดับชั้นอนุบาล 2 (K2)",
+    skills:[
+      {id:"classroom", en:"Classroom Interactions", th:"ปฏิสัมพันธ์ในห้องเรียน", levels:[
+        {en:"Rarely interacts with teachers or classmates, even when prompted; often watches quietly but does not join in",
+         th:"แทบไม่โต้ตอบกับครูหรือนักเรียนอื่น แม้ได้รับการกระตุ้น มักเฝ้าดูอย่างเงียบ ๆ แต่ไม่เข้าร่วมกิจกรรม"},
+        {en:"Sometimes interacts with teachers or classmates when prompted; beginning to respond more regularly to questions and activities",
+         th:"บางครั้งโต้ตอบกับครูหรือนักเรียนเมื่อได้รับการกระตุ้น เริ่มตอบสนองต่อคำถามและกิจกรรมบ่อยขึ้น"},
+        {en:"Comfortably interacts with teachers and classmates when asked most of the time, showing growing confidence in joining group activities",
+         th:"โต้ตอบกับครูและเพื่อนเกือบตลอดเวลาเมื่อถูกถาม แสดงความมั่นใจในการเข้าร่วมกิจกรรมกลุ่ม"},
+        {en:"Interacts confidently and willingly with both teachers and classmates, often without needing reminders, and contributes actively to classroom life",
+         th:"โต้ตอบกับครูและเพื่อนด้วยความมั่นใจและเต็มใจ มักไม่ต้องเตือน และมีส่วนร่วมอย่างแข็งขันในห้องเรียน"}
+      ]},
+      {id:"comprehension", en:"Comprehension and Speaking", th:"ทักษะการฟัง-เข้าใจและการพูด", levels:[
+        {en:"Can name only 1–2 pictures correctly when asked \u201CWhat is this?\u201D; usually answers with single words",
+         th:"สามารถระบุภาพได้เพียง 1–2 ภาพเมื่อถูกถามว่า \u2018นี่คืออะไร?\u2019 มักตอบด้วยคำเดียว"},
+        {en:"Can name 3–4 pictures correctly when asked \u201CWhat is this?\u201D; starting to use short phrases at times",
+         th:"สามารถระบุภาพได้ 3–4 ภาพเมื่อถูกถามว่า \u2018นี่คืออะไร?\u2019 เริ่มใช้วลีสั้น ๆ ในบางครั้ง"},
+        {en:"Can name 5 pictures correctly from each set when asked \u201CWhat is this?\u201D, showing good recall and sentence use",
+         th:"สามารถระบุภาพได้ 5 ภาพจากแต่ละชุดเมื่อถูกถามว่า \u2018นี่คืออะไร?\u2019 แสดงความจำดีและใช้ประโยคได้"},
+        {en:"Can name all pictures correctly in full sentences and may add extra details such as colours, size, or personal connections",
+         th:"ระบุภาพทั้งหมดเป็นประโยคสมบูรณ์ และอาจเพิ่มรายละเอียด เช่น สี ขนาด หรือความเชื่อมโยงส่วนตัว"}
+      ]},
+      {id:"reading", en:"Reading (Phonics)", th:"ทักษะการอ่าน (โฟนิกส์)", levels:[
+        {en:"Finds it difficult to produce the correct sound or identify any words containing it; needs strong teacher support",
+         th:"พบว่ามีความยากลำบากในการออกเสียงที่ถูกต้องหรือระบุคำที่มีเสียงนั้น ต้องการความช่วยเหลือจากครูอย่างมาก"},
+        {en:"Can make the sound and point to 1 word containing it, often with prompting; beginning to connect sound to word meaning",
+         th:"ออกเสียงและชี้คำที่มีเสียงได้ 1 คำ มักต้องกระตุ้น เริ่มเชื่อมเสียงกับความหมาย"},
+        {en:"Can make the sound clearly and point to 2 words containing that sound, showing developing understanding of phonics",
+         th:"ออกเสียงได้ชัดเจนและชี้คำที่มีเสียงได้ 2 คำ แสดงความเข้าใจด้านโฟนิกส์ที่พัฒนา"},
+        {en:"Can make the sound confidently and point to several words containing it, often suggesting extra examples on their own",
+         th:"ออกเสียงมั่นใจและชี้คำหลายคำที่มีเสียง มักยกตัวอย่างเพิ่มเติมเองได้"}
+      ]},
+      {id:"writing", en:"Writing", th:"ทักษะการเขียน", levels:[
+        {en:"Attempts writing but many letters or words are unclear; needs close teacher support to form letters correctly",
+         th:"พยายามเขียนแต่ตัวอักษรหรือคำหลายตัวไม่ชัดเจน ต้องการความช่วยเหลือจากครูอย่างใกล้ชิดเพื่อเขียนตัวอักษรให้ถูกต้อง"},
+        {en:"Can write some words correctly but less than half; beginning to connect letters with sounds and improve control of pencil",
+         th:"สามารถเขียนคำได้บางคำถูกต้อง แต่ยังน้อยกว่าครึ่งหนึ่ง เริ่มเชื่อมตัวอักษรกับเสียงและควบคุมดินสอได้ดีขึ้น"},
+        {en:"Can write about 50% of the words correctly, showing progress in letter formation, spelling, and matching words to pictures",
+         th:"สามารถเขียนคำได้ประมาณ 50% ถูกต้อง แสดงความก้าวหน้าในการสร้างตัวอักษร การสะกดคำ และการจับคู่คำกับภาพ"},
+        {en:"Can write most or all words correctly with clear and neat letter formation, showing strong spelling and increasing independence",
+         th:"เขียนคำส่วนใหญ่หรือทั้งหมดถูกต้อง ตัวอักษรชัดเจน เรียบร้อย แสดงการสะกดคำดีและความเป็นอิสระเพิ่มขึ้น"}
+      ]}
+    ]
+  }
+};
+
+/* ---------- Phonics reading list (Oxford PhonicsCard, words 1–60) ---------- */
+const PH_CLASS="K2.14";
+const PHONICS_WORDS=[
+  "yak","ax","cat","ant","yam","dam","ram","jam","pan","can",
+  "fan","man","bag","rag","dad","pad","nap","tap","cap","map",
+  "hat","mat","bat","rat","vet","ten","web","egg","wet","pet",
+  "jet","net","red","bed","hen","pen","zip","in","hip","ink",
+  "sip","rip","lip","tip","kid","lid","bib","rib","bin","win",
+  "pin","fin","big","dig","fig","wig","six","mix","pit","hit"
+];
+
+const STORE_KEY="eslcc_midterm_t1_2025_v2";
+
+/* Reading checklists for K2.14 — phonics (flat 1–60) and HFW (grouped by week) */
+const CHECKLISTS={
+  phonics:{
+    key:"phonics", label:"Phonics Reading",
+    sub:"OXFORD PHONICSCARD \u00B7 WORDS 1\u201360", printSub:"Oxford PhonicsCard \u00B7 Words 1\u201360",
+    numbered:true,
+    groups:[{title:null, words:PHONICS_WORDS}]
+  },
+  hfw:{
+    key:"hfw", label:"High Frequency Words",
+    sub:"K2 CURRICULUM \u00B7 WEEKS 1\u20138", printSub:"K2 HFW \u00B7 Weeks 1\u20138",
+    numbered:false,
+    groups:[
+      {title:"Week 1", words:["is","am","an","the","it","see","and"]},
+      {title:"Week 2", words:["in","on","you","to","can","he","she","no"]},
+      {title:"Week 3", words:["all","who","we"]},
+      {title:"Week 4", words:["look"]},
+      {title:"Week 5", words:["like"]},
+      {title:"Week 6", words:["this","me","my"]},
+      {title:"Week 8", words:["yes","are"]}
+    ]
+  }
+};
 let DB = load();
+if(!DB.phonics)DB.phonics={};
 let current=null;
 
 function load(){
@@ -332,16 +656,20 @@ function openClass(key){
   current=key;
   const c=DB[key];
   document.getElementById('home').style.display='none';
+  document.getElementById('phonics').classList.remove('active');
   document.getElementById('report').classList.add('active');
   document.getElementById('rptName').textContent=c.label+" Report Card";
   document.getElementById('phName').textContent=c.label+" Report Card";
   document.getElementById('phDate').textContent=new Date().toLocaleDateString(undefined,{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('toPhonicsBtn').style.display=(key===PH_CLASS)?'':'none';
+  document.getElementById('toHFWBtn').style.display=(key===PH_CLASS)?'':'none';
   renderGrid();
   window.scrollTo(0,0);
 }
 function goHome(){
   current=null;
   document.getElementById('report').classList.remove('active');
+  document.getElementById('phonics').classList.remove('active');
   document.getElementById('home').style.display='flex';
   refreshHome();
 }
@@ -354,7 +682,9 @@ function renderGrid(){
   let crit='<tr class="crit">';
   c.sections.forEach(sec=>{
     const span=sec.crit.length+2; // criteria + avg + final
-    grp+=`<th class="g-${sec.id}" colspan="${span}">${esc(sec.title)}</th>`;
+    const hasRubric=(RUBRIC[current]&&RUBRIC[current].skills.some(s=>s.id===sec.id));
+    const info=hasRubric?` <button class="ginfo" title="Scoring guide for this skill" onclick="openGuide(current,'${sec.id}')">&#9733;</button>`:'';
+    grp+=`<th class="g-${sec.id}" colspan="${span}">${esc(sec.title)}${info}</th>`;
     sec.crit.forEach((cr,ci)=>{
       const addBtn = ci===sec.crit.length-1
         ? `<div><button class="addcrit" onclick="addCrit('${sec.id}')">+ add criterion</button></div>` : '';
@@ -462,6 +792,16 @@ function refreshHome(){
     el.className="prog"+(p.complete===p.total?" done":p.started===0?" empty":"");
     el.insertAdjacentHTML('afterbegin','<span class="dot"></span>');
   });
+  [["phonics","prog-phonics"],["hfw","prog-hfw"]].forEach(([bucket,id])=>{
+    const pe=document.getElementById(id);if(!pe)return;
+    const st=(DB[bucket]&&DB[bucket][PH_CLASS])||{};
+    const total=DB[PH_CLASS].students.length;
+    let assessed=0;
+    for(let si=0;si<total;si++){const s=st[si];if(s&&Object.keys(s).length)assessed++;}
+    pe.textContent=`${assessed} of ${total} students started`;
+    pe.className="prog"+(assessed===total&&total>0?" done":assessed===0?" empty":"");
+    pe.insertAdjacentHTML('afterbegin','<span class="dot"></span>');
+  });
 }
 
 /* ---------- CSV export ---------- */
@@ -483,9 +823,144 @@ function exportCSV(){
   const csv=rows.map(r=>r.map(cell=>{const s=String(cell);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}).join(",")).join("\r\n");
   const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8;"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);
-  a.download=current.replace(/[^\w.-]/g,"_")+"_Midterm_T1_2025.csv";
+  a.download=current.replace(/[^\w.-]/g,"_")+"_Midterm_T1_2026.csv";
   document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(a.href);
 }
+
+/* ---------- reading checklists (phonics + HFW) ---------- */
+let curList=null, phCurrent=0, phMode='student';
+function flatWords(def){const a=[];def.groups.forEach(g=>g.words.forEach(w=>a.push({w,group:g.title})));return a;}
+function listStore(def){if(!DB[def.key])DB[def.key]={};if(!DB[def.key][PH_CLASS])DB[def.key][PH_CLASS]={};return DB[def.key][PH_CLASS];}
+function lGet(def,si,wi){const s=listStore(def)[si];return s?(s[wi]||''):'';}
+function lSet(def,si,wi,v){const st=listStore(def);if(!st[si])st[si]={};if(v==='')delete st[si][wi];else st[si][wi]=v;save();}
+function lCycle(def,si,wi){const c=lGet(def,si,wi);lSet(def,si,wi,c===''?'y':c==='y'?'n':'');}
+function lSummary(def,si){const st=listStore(def)[si]||{};const n=flatWords(def).length;let read=0,cant=0;
+  for(let i=0;i<n;i++){const v=st[i];if(v==='y')read++;else if(v==='n')cant++;}
+  return{read,cant,untested:n-read-cant,total:n};}
+
+function openPhonics(){openList('phonics');}
+function openHFW(){openList('hfw');}
+function openList(id){
+  curList=CHECKLISTS[id];
+  current=null;
+  document.getElementById('home').style.display='none';
+  document.getElementById('report').classList.remove('active');
+  document.getElementById('phonics').classList.add('active');
+  document.getElementById('phTitle').textContent="K2.14 \u00B7 "+curList.label;
+  document.getElementById('phSub').textContent=curList.sub;
+  document.getElementById('phPrintName').textContent="K2.14 \u00B7 "+curList.label;
+  document.getElementById('phPrintSub2').textContent=curList.printSub;
+  document.getElementById('phPrintDate').textContent=new Date().toLocaleDateString(undefined,{day:'numeric',month:'long',year:'numeric'});
+  if(phCurrent>=DB[PH_CLASS].students.length)phCurrent=0;
+  renderList();window.scrollTo(0,0);
+}
+function togglePhonicsMode(){phMode=(phMode==='student')?'overview':'student';renderList();}
+function phPick(si){phCurrent=si;renderList();window.scrollTo(0,0);}
+
+function renderList(){
+  const def=curList, students=DB[PH_CLASS].students;
+  document.getElementById('segPhonics').classList.toggle('seg-active',def.key==='phonics');
+  document.getElementById('segHFW').classList.toggle('seg-active',def.key==='hfw');
+  document.getElementById('phModeBtn').textContent=(phMode==='student')?'Overview':'By student';
+  const bar=document.getElementById('phStudentBar'), body=document.getElementById('phBody');
+  if(phMode==='overview'){bar.style.display='none';body.innerHTML=listOverviewHTML(def,students);return;}
+  bar.style.display='flex';
+  bar.innerHTML=students.map((nm,si)=>{const s=lSummary(def,si);
+    return `<button class="ph-pill ${si===phCurrent?'active':''}" onclick="phPick(${si})">${esc(nm)}<span class="pill-badge" id="pill-${si}">${s.read}</span></button>`;}).join('');
+  body.innerHTML=listStudentHTML(def,phCurrent,students[phCurrent]);
+}
+function listStudentHTML(def,si,name){
+  const s=lSummary(def,si);
+  let idx=0, groupsHTML='';
+  def.groups.forEach(g=>{
+    const cells=g.words.map(w=>{
+      const i=idx++, v=lGet(def,si,i), cls=v==='y'?'read':v==='n'?'cant':'', mark=v==='y'?'\u2713':v==='n'?'\u2717':'';
+      const num=def.numbered?`<span class="num">${i+1}</span>`:'';
+      return `<button class="pw ${cls}" id="pw-${si}-${i}" onclick="listTap(${si},${i})">${num}<span class="wtxt">${esc(w)}</span><span class="mark">${mark}</span></button>`;
+    }).join('');
+    groupsHTML+=(g.title?`<div class="pw-group">${esc(g.title)}</div>`:'')+`<div class="pw-grid">${cells}</div>`;
+  });
+  return `<div class="ph-summary">
+      <div class="ph-name wordmark">${esc(name)}</div>
+      <div class="ph-chips" id="phChips">${phChipsHTML(s)}</div>
+      <div class="ph-progress" id="phBar">${phBarHTML(s,s.total)}</div>
+    </div>${groupsHTML}`;
+}
+function phChipsHTML(s){return `<span class="chip read">\u2713 Can read: ${s.read}</span><span class="chip cant">\u2717 Can't read: ${s.cant}</span><span class="chip none">Untested: ${s.untested}</span>`;}
+function phBarHTML(s,total){return `<div class="pbar read" style="width:${s.read/total*100}%"></div><div class="pbar cant" style="width:${s.cant/total*100}%"></div>`;}
+function listTap(si,i){
+  lCycle(curList,si,i);
+  const v=lGet(curList,si,i), btn=document.getElementById(`pw-${si}-${i}`);
+  btn.className='pw '+(v==='y'?'read':v==='n'?'cant':'');
+  btn.querySelector('.mark').textContent=v==='y'?'\u2713':v==='n'?'\u2717':'';
+  const s=lSummary(curList,si);
+  const chips=document.getElementById('phChips');if(chips)chips.innerHTML=phChipsHTML(s);
+  const bar=document.getElementById('phBar');if(bar)bar.innerHTML=phBarHTML(s,s.total);
+  const badge=document.getElementById(`pill-${si}`);if(badge)badge.textContent=s.read;
+}
+function listOverviewHTML(def,students){
+  const rows=students.map((nm,si)=>{const s=lSummary(def,si);
+    return `<tr onclick="phFromOverview(${si})">
+      <td class="ov-name">${esc(nm)}</td>
+      <td class="ov-num read">${s.read}</td>
+      <td class="ov-num cant">${s.cant}</td>
+      <td class="ov-num">${s.untested}</td>
+      <td class="ov-bar"><div class="ovbarwrap">${phBarHTML(s,s.total)}</div></td></tr>`;}).join('');
+  return `<div class="ph-overview"><table class="ov-table">
+    <thead><tr><th>Student</th><th>Can read</th><th>Can't read</th><th>Untested</th><th>Progress</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+function phFromOverview(si){phCurrent=si;phMode='student';renderList();window.scrollTo(0,0);}
+function exportListCSV(){
+  const def=curList, students=DB[PH_CLASS].students, words=flatWords(def), rows=[];
+  const head=["Student","Can read","Can't read","Untested"];
+  words.forEach((o,i)=>head.push(def.numbered?`${i+1}. ${o.w}`:(o.group?`${o.group}: ${o.w}`:o.w)));
+  rows.push(head);
+  students.forEach((nm,si)=>{const s=lSummary(def,si), r=[nm,s.read,s.cant,s.untested];
+    words.forEach((o,i)=>{const v=lGet(def,si,i);r.push(v==='y'?'read':v==='n'?"can't":'');});
+    rows.push(r);});
+  const csv=rows.map(r=>r.map(c=>{const t=String(c);return /[",\n]/.test(t)?'"'+t.replace(/"/g,'""')+'"':t;}).join(",")).join("\r\n");
+  const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8;"});
+  const fn="K2.14_"+(def.key==='hfw'?"HFW_Weeks_1-8":"Phonics_Reading_1-60")+".csv";
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fn;
+  document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(a.href);
+}
+
+/* ---------- scoring guide modal ---------- */
+function openGuide(cls,skillId){
+  const r=RUBRIC[cls]; if(!r)return;
+  let h=`<div class="gd-head">
+      <svg class="crest" viewBox="0 0 100 100" aria-hidden="true"></svg>
+      <div class="gd-titles"><div class="gd-title wordmark">${esc(r.enTitle)}</div>
+      <div class="gd-titleth">${esc(r.thTitle)}</div></div>
+      <button class="gd-close" onclick="closeGuide()" aria-label="Close">&times;</button></div>`;
+  h+=`<div class="gd-legend">`+LEVELS.map((L,i)=>
+      `<span class="lvchip lv${i+1}">${'\u2605'.repeat(i+1)}<b>${esc(L.en)}</b></span>`).join('')+`</div>`;
+  r.skills.forEach(sk=>{
+    h+=`<div class="gd-skill" id="gd-${sk.id}">
+        <div class="gd-skillname"><span class="wordmark">${esc(sk.en)}</span><span class="th">${esc(sk.th)}</span></div>
+        <div class="gd-levels">`;
+    sk.levels.forEach((lv,i)=>{
+      h+=`<div class="gd-lv lv${i+1}">
+          <div class="gd-stars">${'\u2605'.repeat(i+1)}<span class="gd-lvlabel">${esc(LEVELS[i].en)}</span></div>
+          <div class="gd-en">${esc(lv.en)}</div>
+          <div class="gd-th">${esc(lv.th)}</div></div>`;
+    });
+    h+=`</div></div>`;
+  });
+  const body=document.getElementById('gdBody');
+  body.innerHTML=h;
+  body.querySelectorAll('.crest').forEach(s=>s.innerHTML=CREST);
+  document.getElementById('guide').classList.add('open');
+  document.body.style.overflow='hidden';
+  const sheet=document.querySelector('.guide-sheet'); sheet.scrollTop=0;
+  if(skillId){const el=document.getElementById('gd-'+skillId); if(el)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),60);}
+}
+function closeGuide(){
+  document.getElementById('guide').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeGuide();});
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function printReport(){window.print();}
